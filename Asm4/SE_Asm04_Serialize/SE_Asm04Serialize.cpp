@@ -8,8 +8,8 @@ int main ( )
 {
 	setlocale ( LC_ALL, "rus" );
 
-	short  a[4] = { 0, -15, 32767, -32768 };  // переменные
-	unsigned short b[3] = { 0, 22, 65535 };           // литералы (2 байта)
+	short  a[4] = { 11, -22,-44,55 };  // переменные
+	unsigned short b[3] = { 76,245,31000 };           // литералы (2 байта)
 
 	unsigned char plan[100];
 	int size = 0;
