@@ -21,7 +21,7 @@ namespace MFST
 {
 	struct MfstState
 	{
-		short lenta_postion;
+		short lenta_position;
 		short nrulechain;
 		MFSTSTSTACK st;
 		MfstState ( );
@@ -51,10 +51,10 @@ namespace MFST
 
 		struct MfstDiagnosis
 		{
-			short lenta_positions;
+			short lenta_position;
 			RC_STEP rc_step;
 			short nrule;
-			short nrule_chaun;
+			short nrule_chain;
 			MfstDiagnosis ( );
 			MfstDiagnosis (
 				short plenta_position,
