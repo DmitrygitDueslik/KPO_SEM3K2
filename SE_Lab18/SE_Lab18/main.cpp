@@ -56,13 +56,13 @@ int main ( int argc, char* argv[] )
 		Log::WriteLT ( log, lt );
 		Log::WriteIT ( log, it );
 
-		// 6. Синтаксический анализ (лаба 18)
+		// 6. Синтаксический анализ
 		LEX::LEX lex;
-		lex.lextable = lt;                                  // таблица лексем из лексического анализа
-		lex.idtable = it;                                   // таблица идентификаторов
+		lex.lextable = lt;
+		lex.idtable = it;
 
 		std::cout << std::endl;
-		MFST_TRACE_START                                    // отладка: заголовок трассировки
+		MFST_TRACE_START
 			MFST::Mfst mfst ( lex, GRB::getGreibach ( ) );           // автомат
 		bool syntaxOk = mfst.start ( );                       // старт синтаксического анализа
 

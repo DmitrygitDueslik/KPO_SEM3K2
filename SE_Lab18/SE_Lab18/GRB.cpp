@@ -1,12 +1,14 @@
 #include "stdafx.h"
 #include "GRB.h"
 #define GRB_ERROR_SERIES 600
+
 namespace GRB
 {
 #define NS(n) Rule::Chain::N(n)
 #define TS(n) Rule::Chain::T(n)
-	Greibach greibach ( NS ( 'S' ), TS ( '$' ),     // стартовый символ, дно стека
-		6,                                  // количество правил
+
+	Greibach greibach ( NS ( 'S' ), TS ( '$' ),
+		6,
 
 		Rule ( NS ( 'S' ), GRB_ERROR_SERIES + 0, // Неверная структура программы
 			3,  // S -> m{NrE;}; | tfi(F){NrE;};S | m{NrE;};S
@@ -14,6 +16,7 @@ namespace GRB
 			Rule::Chain ( 14, TS ( 't' ), TS ( 'f' ), TS ( 'i' ), TS ( '(' ), NS ( 'F' ), TS ( ')' ), TS ( '{' ), NS ( 'N' ), TS ( 'r' ), NS ( 'E' ), TS ( ';' ), TS ( '}' ), TS ( ';' ), NS ( 'S' ) ),
 			Rule::Chain ( 9, TS ( 'm' ), TS ( '{' ), NS ( 'N' ), TS ( 'r' ), NS ( 'E' ), TS ( ';' ), TS ( '}' ), TS ( ';' ), NS ( 'S' ) )
 		),
+
 		Rule ( NS ( 'N' ), GRB_ERROR_SERIES + 1, // Ошибочный оператор
 			10, // N -> dti; | rE; | i=E; | dtfi(F); | pE; | dti;N | rE;N | i=E;N | dtfi(F);N | pE;N
 			Rule::Chain ( 4, TS ( 'd' ), TS ( 't' ), TS ( 'i' ), TS ( ';' ) ),
@@ -27,6 +30,7 @@ namespace GRB
 			Rule::Chain ( 9, TS ( 'd' ), TS ( 't' ), TS ( 'f' ), TS ( 'i' ), TS ( '(' ), NS ( 'F' ), TS ( ')' ), TS ( ';' ), NS ( 'N' ) ),
 			Rule::Chain ( 4, TS ( 'p' ), NS ( 'E' ), TS ( ';' ), NS ( 'N' ) )
 		),
+
 		Rule ( NS ( 'E' ), GRB_ERROR_SERIES + 2, // Ошибка в выражении
 			8,  // E -> i | l | (E) | i(W) | iM | lM | (E)M | i(W)M
 			Rule::Chain ( 1, TS ( 'i' ) ),
@@ -38,16 +42,19 @@ namespace GRB
 			Rule::Chain ( 4, TS ( '(' ), NS ( 'E' ), TS ( ')' ), NS ( 'M' ) ),
 			Rule::Chain ( 5, TS ( 'i' ), TS ( '(' ), NS ( 'W' ), TS ( ')' ), NS ( 'M' ) )
 		),
+
 		Rule ( NS ( 'M' ), GRB_ERROR_SERIES + 2, // Ошибка в выражении
 			2,  // M -> vE | vEM
 			Rule::Chain ( 2, TS ( 'v' ), NS ( 'E' ) ),
 			Rule::Chain ( 3, TS ( 'v' ), NS ( 'E' ), NS ( 'M' ) )
 		),
+
 		Rule ( NS ( 'F' ), GRB_ERROR_SERIES + 3, // Ошибка в параметрах функции
 			2,  // F -> ti | ti,F
 			Rule::Chain ( 2, TS ( 't' ), TS ( 'i' ) ),
 			Rule::Chain ( 4, TS ( 't' ), TS ( 'i' ), TS ( ',' ), NS ( 'F' ) )
 		),
+
 		Rule ( NS ( 'W' ), GRB_ERROR_SERIES + 4, // Ошибка в параметрах вызываемой функции
 			4,  // W -> i | l | i,W | l,W
 			Rule::Chain ( 1, TS ( 'i' ) ),
@@ -65,11 +72,11 @@ namespace GRB
 		nt[0] = s;
 		va_list args;
 		va_start ( args, s );
-		for ( short i = 1; i < psize; i++ ) {
-			nt[i] = (GRBALPHABET)va_arg ( args, int );// short в "..." передаётся как int
-		}
+		for ( short i = 1; i < psize; i++ )
+			nt[i] = (GRBALPHABET)va_arg ( args, int );   // short в "..." передаётся как int
 		va_end ( args );
 	}
+
 	char* Rule::Chain::getCChain ( char* b )
 	{
 		for ( int i = 0; i < size; i++ )
@@ -88,9 +95,8 @@ namespace GRB
 		chains[0] = c;
 		va_list args;
 		va_start ( args, c );
-		for ( short i = 1; i < psize; i++ ) {
+		for ( short i = 1; i < psize; i++ )
 			chains[i] = va_arg ( args, Chain );
-		}
 		va_end ( args );
 	}
 
@@ -155,6 +161,7 @@ namespace GRB
 			rc = rules[n];
 		return rc;
 	}
+
 	Greibach getGreibach ( )
 	{
 		return greibach;
