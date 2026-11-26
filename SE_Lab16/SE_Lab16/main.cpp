@@ -27,37 +27,35 @@
     FST::NODE() \
     )
 
-void test(char* str)
+void test ( char* str )
 {
-    FST::FST fst = MY_FST(str);
-    if (FST::execute(fst))
-    {
-        std::cout << "÷епочка \"" << str << "\" распознана" << std::endl;
-    }
-    else
-    {
-        std::cout << "÷епочка \"" << str << "\" не распознана" << std::endl;
-    }
+	FST::FST fst = MY_FST ( str );
+	if ( FST::execute ( fst ) ) {
+		std::cout << "÷епочка \"" << str << "\" распознана" << std::endl;
+	}
+	else {
+		std::cout << "÷епочка \"" << str << "\" не распознана" << std::endl;
+	}
 }
 
-int main(int argc, char* argv[])
+int main ( int argc, char* argv[] )
 {
-    setlocale(LC_ALL, "Russian");
-    system("chcp 1251");
+	setlocale ( LC_ALL, "Russian" );
+	system ( "chcp 1251" );
 
-    // 7 цепочек из лабы 13 (должны распознаватьс€)
-    test((char*)"while do;");
-    test((char*)"while read do;");
-    test((char*)"while write do;");
-    test((char*)"while seek do;");
-    test((char*)"while writeread do;");
-    test((char*)"while readseek do;");
-    test((char*)"while writereadseek do;");
+	// 7 цепочек из лабы 13 (должны распознаватьс€)
+	test ( (char*)"while do;" );
+	test ( (char*)"while read do;" );
+	test ( (char*)"while write do;" );
+	test ( (char*)"while seek do;" );
+	test ( (char*)"while writeread do;" );
+	test ( (char*)"while readseek do;" );
+	test ( (char*)"while writereadseek do;" );
 
-    // 2 цепочки, которые Ќ≈ должны распознаватьс€ (п.9-11 методички)
-    test((char*)"while do");        // все символы прочитаны, но не хватает ";"
-    test((char*)"while xyz do;");   // разбор обрываетс€ раньше конца строки
+	// 2 цепочки, которые Ќ≈ должны распознаватьс€ (п.9-11 методички)
+	test ( (char*)"while do" );        // все символы прочитаны, но не хватает ";"
+	test ( (char*)"while xyz do;" );   // разбор обрываетс€ раньше конца строки
 
-    system("pause");
-    return 0;
+	system ( "pause" );
+	return 0;
 }

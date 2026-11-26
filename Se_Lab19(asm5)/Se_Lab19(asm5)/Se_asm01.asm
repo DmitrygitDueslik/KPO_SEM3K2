@@ -4,7 +4,7 @@ includelib kernel32.lib
 
 ExitProcess PROTO: DWORD
 
-.STACK 4986
+.STACK 4086
 .DATA
 massiv   SDWORD 12, -5, 33, 7, -12, 18, 0, 95, -3, 9
 minimum  SDWORD ?
